@@ -219,3 +219,8 @@ __marimo__/
 
 # others
 trial_1.ipynb
+test_files/*
+my_experience.json
+artifacts/*
+research/logs/running_logs.log
+
