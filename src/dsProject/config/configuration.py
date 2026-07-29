@@ -1,8 +1,14 @@
 from dsProject.constants import *
 from dsProject.utils.common import read_yaml, create_directories
-from dsProject.entity.config_entity import (DataIngestionConfig, DataValidationConfig, DataTransformationConfig, ModelTrainerConfig)
+from dotenv import load_dotenv
+import os
+from dsProject.entity.config_entity import (DataIngestionConfig, 
+                                            DataValidationConfig, 
+                                            DataTransformationConfig, ModelTrainerConfig, ModelEvaluationConfig)
 
 
+load_dotenv()
+mlflow_tracking_uri = os.getenv("MLFLOW_TRACKING_URI")
 
 class ConfigurationManager:
     def __init__(self, config_filepath=CONFIG_FILE_PATH, 
@@ -68,6 +74,24 @@ class ConfigurationManager:
             
         )
         return model_trainer_config
+    
+    
+    def get_model_evaluation_config(self)-> ModelEvaluationConfig:
+        config = self.config.model_evaluation
+        schema = self.schema
+        params = self.params
+        create_directories([config.root_dir])
+        model_evaluation_config = ModelEvaluationConfig(
+            root_dir=config.root_dir,
+            test_data_path=config.test_data_path,
+            model_path=config.model_path,
+            metric_file_name=config.metric_file_name,
+            target_column=schema.TARGET_COLUMN.name,
+            mlflow_uri=mlflow_tracking_uri,
+            all_params=params.ElasticNet
+        )
+        return model_evaluation_config
+        
             
 
         

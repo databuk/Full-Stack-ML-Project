@@ -2,6 +2,7 @@ from dsProject.pipeline.data_ingestion_pipeline import DataIngestionPipeline
 from dsProject.pipeline.data_validation_pipeline import DataValidationPipeline
 from dsProject.pipeline.data_transformation_pipeline import DataTransformationPipeline
 from dsProject.pipeline.model_trainer_pipeline import ModelTrainerPipeline
+from dsProject.pipeline.model_evaluation_pipeline import ModelEvaluationPipeline
 from dsProject import logger
 
 STAGE_NAME = "Data Ingestion Pipeline"
@@ -46,4 +47,15 @@ if __name__ == '__main__':
         logger.exception(e)
         raise e
 
+STAGE_NAME = "Model Evaluation Pipeline"
+if __name__=="__main__":
+    try:
+        logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
+
+        model_evaluation_pipeline = ModelEvaluationPipeline()
+        model_evaluation_pipeline.main()
+        logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+
+    except Exception as e:
+        raise e   
             
