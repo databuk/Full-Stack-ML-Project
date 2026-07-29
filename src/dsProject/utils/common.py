@@ -78,8 +78,8 @@ def load_json(path: Path) -> ConfigBox:
         raise e
     
 
-#@ensure_annotations
-def save_bin(path: Path, data: BaseEstimator):
+@ensure_annotations
+def save_bin(data: object, path: Path):
     """
     Saves data as a binary file using joblib.
     Args:
@@ -87,8 +87,7 @@ def save_bin(path: Path, data: BaseEstimator):
         data (Any): Data to save as binary.
     """
     try:
-        with open(path, "wb") as bin_file:
-            joblib.dump(data, bin_file)
+        joblib.dump(value=data, filename=path)
         logger.info(f"Binary file saved at: {path}")
     except Exception as e:
         logger.error(f"Error saving binary file at {path}: {e}")
