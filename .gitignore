@@ -224,4 +224,4 @@ my_experience.json
 artifacts/*
 research/logs/running_logs.log
 .env
-
+test.py
