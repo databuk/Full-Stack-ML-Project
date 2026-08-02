@@ -81,7 +81,12 @@ jobs:
 
       - name: Stop and remove previous container
         run: |
-          docker ps -q --filter "name=dsproject" | grep -q . && docker stop dsproject && docker rm -fv dsproject
+          docker stop dsproject 2>/dev/null || true
+          docker rm -fv dsproject 2>/dev/null || true
+
+      # - name: Stop and remove previous container
+      #   run: |
+      #     docker ps -q --filter "name=dsproject" | grep -q . && docker stop dsproject && docker rm -fv dsproject
 
       - name: Run docker image to serve server
         run: |
