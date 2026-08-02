@@ -225,3 +225,4 @@ artifacts/*
 research/logs/running_logs.log
 .env
 test.py
+aws_config
